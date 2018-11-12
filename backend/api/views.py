@@ -6,12 +6,13 @@ from rest_framework.pagination import PageNumberPagination
 
 from .serializers import (
     PersonSerializer, 
-    # WeponSerializer, 
-    AmmoSerializer
-    )#, ShootingSerializer
+    WeponSerializer, 
+    AmmoSerializer,
+    ShootingSerializer,
+    )
 from .models import (
     Person,
-    # Wepon,
+    Wepon,
     Shooting,
     Ammo,
     )
@@ -22,10 +23,10 @@ class PersonView(ListAPIView):
     serializer_class = PersonSerializer
     permission_classes = [IsAuthenticated,]
 
-# class WeponView(ListAPIView):
-#     queryset = Wepon.objects.all()
-#     serializer_class = WeponSerializer
-#     permission_classes = [IsAuthenticated,]
+class WeponView(ListAPIView):
+    queryset = Wepon.objects.all()
+    serializer_class = WeponSerializer
+    permission_classes = [IsAuthenticated,]
 
 class AmmoView(ListAPIView):
     queryset = Ammo.objects.all()

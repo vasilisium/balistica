@@ -5,7 +5,7 @@ from rest_framework.serializers import (
     )
 from .models import (
     Person, 
-    # Wepon, 
+    Wepon, 
     Shooting,
     Ammo
     )
@@ -13,12 +13,33 @@ from .models import (
 class PersonSerializer(ModelSerializer):
     class Meta:
         model = Person
-        fields = ('first_name', 'second_name', 'last_name', 'address', 'mobile', 'date_created')
+        fields = (
+            'first_name',
+            'second_name',
+            'last_name',
+            'address',
+            'mobile',
+            'date_created'
+        )
 
-# class WeponSerializer(ModelSerializer):
-#     class Meta:
-#         model = Wepon
-#         fields =('brend', 'model', 'calibre', 'serial_number', 'date_created')
+class WeponSerializer(ModelSerializer):
+    owner = SerializerMethodField()
+
+    class Meta:
+        model = Wepon
+        
+        fields =(
+            'owner',
+            'brend',
+            'model',
+            'calibre',
+            'serial_number',
+            'date_created'
+        )
+
+    def get_owner(self, obj):
+        return str(obj.owner)
+
 
 class AmmoSerializer(ModelSerializer):
     class Meta:
@@ -33,12 +54,12 @@ class ShootingSerializer(ModelSerializer):
 
         fields = (
             'person',
-            # 'wepon', 
+            'wepon', 
             'date_Shooting', 
             'ammo', 
             'document', 
             'safe_number'
-            )
+        )
 
         # def get_person(self, obj):
         #     return str(obj.person.last_name)

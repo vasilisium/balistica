@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'admin_reorder',
     # 'rest_framework.authtoken',
 ]
 
@@ -53,6 +54,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     'corsheaders.middleware.CorsMiddleware',
+    'admin_reorder.middleware.ModelAdminReorder',
 ]
 
 ROOT_URLCONF = 'balistica.urls'
@@ -97,6 +99,11 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+ADMIN_REORDER  = (
+    'auth', 
+    {'app': 'api', 'models' : ('api.Person', 'api.Wepon', 'api.Ammo', 'api.Shooting')}, 
+)
 
 
 # Internationalization
