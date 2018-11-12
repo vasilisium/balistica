@@ -4,31 +4,59 @@ from django.db import models
 
 class Person(models.Model):
     '''Персона'''
-    first_name = models.CharField(max_length=30)
-    second_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
-    address = models.CharField(max_length=100) 
-    mobile = models.CharField(max_length=13)
-    date = models.DateTimeField('Дата/час зпису', auto_now_add=True)
+    first_name = models.CharField('Ім\'я', max_length=30)
+    second_name = models.CharField('По батькові', max_length=30)
+    last_name = models.CharField('Прізвище', max_length=30)
+    address = models.TextField('Адреса') 
+    mobile = models.CharField('Номер мобільного', max_length=13)
+    date_created = models.DateTimeField('Дата/час зпису', auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.last_name} {self.first_name[0:1:]}.{self.second_name[0:1:]}.'
+
+    class Meta:
+        verbose_name = 'Реєстраційні данні особи'
+        verbose_name_plural = 'Реєстраційні данні особи'
 
 class Wepon(models.Model):
     '''Зброя'''
+    owner = models.ForeignKey(Person, verbose_name="Власник", on_delete=models.DO_NOTHING, null=True)
     brend = models.CharField("Марка", max_length=30)
     model = models.CharField("Модель", max_length=30)
-    calibre = models.DecimalField("Калібр", decimal_places=2, max_digits=8)
-    serial_number = models.CharField("Номер",max_length=30)
-    date = models.DateTimeField('Дата/час зпису', auto_now_add=True)
+    calibre = models.CharField("Калібр", max_length=15)
+    serial_number = models.CharField("Номер", max_length=30)
+    date_created = models.DateTimeField('Дата/час зпису', auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.brend} {self.model} {self.calibre} №{self.serial_number}'
+
+    class Meta:
+        verbose_name = 'Зброя'
+        verbose_name_plural = 'Перелік зброї'
 
 class Ammo(models.Model):
     '''Тип набою'''
     description = models.CharField('Тип набою', max_length=30)
 
+    def __str__(self):
+        return self.description
+
+    class Meta:
+        verbose_name = 'Тип набою'
+        verbose_name_plural = 'Типи набоїв'
+
 class Shooting(models.Model):
     ''' Модель записа відстрілу зброї'''
     person = models.ForeignKey(Person, verbose_name="Власник", on_delete = models.DO_NOTHING)
-    wepon = models.ForeignKey(Wepon, verbose_name="Зброя", on_delete = models.DO_NOTHING)
+    wepon = models.ForeignKey(Wepon, verbose_name="Зброя", on_delete = models.DO_NOTHING, default=0)
     ammo = models.ForeignKey(Ammo, verbose_name="Тип набоїв", on_delete = models.DO_NOTHING)
-    date = models.DateTimeField("дата/час", auto_now_add=True)
+    date_Shooting = models.DateTimeField("дата/час", auto_now_add=True)
+    document = models.CharField('Номер документа про оплату', max_length=20, default='')
+    safe_number = models.CharField('Номер сейфу зберігання', max_length=5, default='')
+
+    class Meta:
+        verbose_name = 'Запис відстрілу зброї'
+        verbose_name_plural = 'Записи відстрілу зброї'
 
 
 
