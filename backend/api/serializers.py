@@ -24,10 +24,8 @@ class PersonSerializer(ModelSerializer):
 
 class WeponSerializer(ModelSerializer):
     owner = SerializerMethodField()
-
     class Meta:
         model = Wepon
-        
         fields =(
             'owner',
             'brend',
@@ -47,19 +45,27 @@ class AmmoSerializer(ModelSerializer):
         fields = ('description',)
 
 class ShootingSerializer(ModelSerializer):
+    owner  = SerializerMethodField()
+    def get_owner(self, obj):
+        return str(obj.wepon.owner)
+
+    wepon  = SerializerMethodField()
+    def get_wepon(self, obj):
+        return str(obj.wepon)
+
+    ammo = SerializerMethodField()
+    def get_ammo(self, obj):
+        return str(obj.ammo)
+
     class Meta:
         model = Shooting
-
-        # person  = SerializerMethodField()
-
         fields = (
-            'person',
+            'owner',
             'wepon', 
             'date_Shooting', 
             'ammo', 
             'document', 
-            'safe_number'
+            'safe_number',
         )
 
-        # def get_person(self, obj):
-        #     return str(obj.person.last_name)
+    

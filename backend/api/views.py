@@ -32,3 +32,8 @@ class AmmoView(ListAPIView):
     queryset = Ammo.objects.all()
     serializer_class = AmmoSerializer
     permission_classes = [IsAuthenticated,]
+
+class ShootingView(ListAPIView):
+    queryset = Shooting.objects.all()
+    serializer_class = ShootingSerializer
+    permission_classes = [IsAuthenticated,]

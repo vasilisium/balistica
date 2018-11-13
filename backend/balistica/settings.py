@@ -101,8 +101,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 ADMIN_REORDER  = (
-    'auth', 
-    {'app': 'api', 'models' : ('api.Person', 'api.Wepon', 'api.Ammo', 'api.Shooting')}, 
+    # 'auth', 
+    {'app': 'api', 'models' : ('api.Person',  'api.WeponType', 'api.Wepon', 'api.Ammo', 'api.Shooting')}, 
 )
 
 
