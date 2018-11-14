@@ -14,7 +14,6 @@ import {MaterialModule} from './material.components'
     NavComponent
   ],
   imports: [
-    
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
