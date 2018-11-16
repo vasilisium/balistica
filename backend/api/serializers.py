@@ -57,6 +57,10 @@ class ShootingSerializer(ModelSerializer):
     def get_ammo(self, obj):
         return str(obj.ammo)
 
+    date_Shooting = SerializerMethodField()
+    def get_date_Shooting(self, obj):
+        return obj.date_Shooting.strftime("%d-%m-%Y %H:%M:%S")
+
     class Meta:
         model = Shooting
         fields = (
