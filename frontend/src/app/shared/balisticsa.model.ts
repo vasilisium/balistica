@@ -1,3 +1,12 @@
+import { ArrayType } from "@angular/compiler";
+
+export interface APIView{
+    count: number;
+    next: string;
+    previous: string;
+    results: Array<any>;
+}
+
 export interface SootingView {
     owner: string;
     wepon: string;

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SootingView } from '../shared/balisticsa.model'
+import { APIView, SootingView } from '../shared/balisticsa.model'
 import { BalisticsAPIService } from '../shared/balistics-api.service';
 // import { MatTableDataSource } from '@angular/material';
 import { Observable } from 'rxjs';
@@ -23,7 +23,9 @@ export class DataviewerComponent implements OnInit {
 
   constructor(private service:BalisticsAPIService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    // this.service.getShootings();
+  }
 
   displayedColumns: ReadonlyArray<string> = [
     'owner',

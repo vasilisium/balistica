@@ -11,7 +11,6 @@ var modules = [
     MatToolbarModule, 
     MatIconModule, 
     MatButtonModule, 
-    ,
 ]
 
 @NgModule ({
