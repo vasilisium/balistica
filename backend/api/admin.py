@@ -42,7 +42,7 @@ class WeponAdmin(admin.ModelAdmin):
     '''Перелік зброї'''
     list_display = (
         'owner',
-        'brend',
+        'brand',
         'model',
         'calibre',
         'serial_number',

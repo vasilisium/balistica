@@ -28,8 +28,8 @@ export class DataviewerComponent implements OnInit {
   }
 
   displayedColumns: ReadonlyArray<string> = [
-    'owner',
-    'wepon', 
+    'owner', 
+    'wepon',
     'date_Shooting', 
     'ammo', 
     'document', 

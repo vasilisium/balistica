@@ -34,7 +34,7 @@ class Wepon(Model):
     '''Зброя'''
     # wepon_type = ForeignKey (WeponType, verbose_name="Тип зброї", on_delete=CASCADE)
     owner = ForeignKey(Person, verbose_name="Власник", on_delete=CASCADE)
-    brend = CharField("Марка", max_length=30)
+    brand = CharField("Марка", max_length=30)
     model = CharField("Модель", max_length=30)
     calibre = CharField("Калібр", max_length=15)
     serial_number = CharField("Номер", max_length=30)

@@ -10,10 +10,14 @@ from .models import (
     Ammo
     )
 
+def dateToStr(date, format="%d.%m.%Y %H:%M:%S"):
+    return date.strftime(format)
+
 class PersonSerializer(ModelSerializer):
     class Meta:
         model = Person
         fields = (
+            'id',
             'first_name',
             'second_name',
             'last_name',
@@ -22,49 +26,63 @@ class PersonSerializer(ModelSerializer):
             'date_created'
         )
 
+class PersonNameSerializer(ModelSerializer):
+    date_created = SerializerMethodField()
+    def get_date_created(self, obj):
+        return dateToStr(obj.date_created)
+
+    class Meta:
+        model = Person
+        fields = (
+            'id',
+            'first_name',
+            'second_name',
+            'last_name',
+            'date_created',
+        )
+
+
 class WeponSerializer(ModelSerializer):
-    owner = SerializerMethodField()
+    owner = PersonNameSerializer()
+
+    date_created = SerializerMethodField()
+    def get_date_created(self, obj):
+        return dateToStr(obj.date_created)
+
     class Meta:
         model = Wepon
         fields =(
+            'id',
             'owner',
-            'brend',
+            'brand',
             'model',
             'calibre',
             'serial_number',
             'date_created'
         )
 
-    def get_owner(self, obj):
-        return str(obj.owner)
-
 
 class AmmoSerializer(ModelSerializer):
     class Meta:
         model = Ammo
-        fields = ('description',)
+        fields = ('id', 'description',)
 
 class ShootingSerializer(ModelSerializer):
-    owner  = SerializerMethodField()
-    def get_owner(self, obj):
-        return str(obj.wepon.owner)
 
-    wepon  = SerializerMethodField()
-    def get_wepon(self, obj):
-        return str(obj.wepon)
+    wepon  = WeponSerializer()
 
-    ammo = SerializerMethodField()
-    def get_ammo(self, obj):
-        return str(obj.ammo)
+    ammo = AmmoSerializer()
 
     date_Shooting = SerializerMethodField()
     def get_date_Shooting(self, obj):
-        return obj.date_Shooting.strftime("%d-%m-%Y %H:%M:%S")
+        return dateToStr(obj.date_Shooting)
 
     class Meta:
         model = Shooting
+        # ordering = ['date_Shooting']
+        # order_by = ['-date_Shooting']
         fields = (
-            'owner',
+            'id',
             'wepon', 
             'date_Shooting', 
             'ammo', 
