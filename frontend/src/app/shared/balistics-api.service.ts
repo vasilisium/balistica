@@ -18,7 +18,6 @@ export class BalisticsAPIService {
   getShootings(): Observable<SootingView[]>{
     let result = this.httpClient.get(this.rootAPI_URL + '/shooting/')
     .pipe(map( data => { return data['results'] }))
-    console.log(result);
     return result;
   }
 }

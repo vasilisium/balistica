@@ -11,6 +11,8 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { DataviewerComponent } from './dataviewer/dataviewer.component';
 import {MatTableModule} from '@angular/material/table';
+import { DialogComponent } from './dataviewer/dialog/dialog.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -18,6 +20,7 @@ import {MatTableModule} from '@angular/material/table';
     AppComponent,
     NavComponent,
     DataviewerComponent,
+    DialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,8 +29,13 @@ import {MatTableModule} from '@angular/material/table';
     MaterialModule,
     HttpClientModule,
     MatTableModule,
+    FormsModule, 
+    ReactiveFormsModule,
   ],
-  providers: [BalisticsAPIService],
+  providers: [
+    BalisticsAPIService,
+  ],
+  entryComponents:[DialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
