@@ -1,4 +1,4 @@
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, UpdateAPIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
@@ -21,17 +21,22 @@ from .models import (
 class PersonView(ListAPIView):
     queryset = Person.objects.all()
     serializer_class = PersonSerializer
-    permission_classes = [IsAuthenticated,]
+    # permission_classes = [IsAuthenticated,]
+
+class PersonUpdateView(UpdateAPIView):
+    queryset = Person.objects.all()
+    serializer_class = PersonSerializer
+
 
 class WeponView(ListAPIView):
     queryset = Wepon.objects.all()
     serializer_class = WeponSerializer
-    permission_classes = [IsAuthenticated,]
+    # permission_classes = [IsAuthenticated,]
 
 class AmmoView(ListAPIView):
     queryset = Ammo.objects.all()
     serializer_class = AmmoSerializer
-    permission_classes = [IsAuthenticated,]
+    # permission_classes = [IsAuthenticated,]
 
 class ShootingView(ListAPIView):
     queryset = Shooting.objects.all()
