@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 from rest_framework.generics import ListAPIView, CreateAPIView
 from rest_framework.views import APIView
+=======
+from rest_framework.generics import ListAPIView, UpdateAPIView
+>>>>>>> 3c03184f11f5aad048537e7a55c026434b7c9fe5
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from rest_framework.permissions import IsAuthenticated, AllowAny
@@ -41,17 +45,22 @@ class UserLoginView(APIView):
 class PersonView(ListAPIView):
     queryset = Person.objects.all()
     serializer_class = PersonSerializer
-    permission_classes = [IsAuthenticated,]
+    # permission_classes = [IsAuthenticated,]
+
+class PersonUpdateView(UpdateAPIView):
+    queryset = Person.objects.all()
+    serializer_class = PersonSerializer
+
 
 class WeponView(ListAPIView):
     queryset = Wepon.objects.all()
     serializer_class = WeponSerializer
-    permission_classes = [IsAuthenticated,]
+    # permission_classes = [IsAuthenticated,]
 
 class AmmoView(ListAPIView):
     queryset = Ammo.objects.all()
     serializer_class = AmmoSerializer
-    permission_classes = [IsAuthenticated,]
+    # permission_classes = [IsAuthenticated,]
 
 class ShootingView(ListAPIView):
     queryset = Shooting.objects.all()
