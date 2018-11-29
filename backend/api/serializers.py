@@ -1,6 +1,5 @@
 from rest_framework.serializers import (
     ModelSerializer,
-    # HyperlinkedModelSerializer,
     SerializerMethodField,
     )
 from .models import (
@@ -9,9 +8,30 @@ from .models import (
     Shooting,
     Ammo
     )
+from django.contrib.auth import get_user_model
+from django.db.models.fields import CharField, EmailField
 
 def dateToStr(date, format="%d.%m.%Y %H:%M:%S"):
     return date.strftime(format)
+
+User = get_user_model()
+class UserLoginSerializer(ModelSerializer):
+    token = CharField(blank=True, editable=False)
+    username = CharField(blank=True)
+    email = EmailField(blank=True)
+
+    class Meta:
+        model = User
+        fields = (
+            'username', 
+            'email',
+            'password',
+            'token',
+        )
+        extra_kwargs = {'password':
+            {'write_only': True}
+        }
+
 
 class PersonSerializer(ModelSerializer):
     class Meta:

@@ -3,7 +3,9 @@ from .views import (
     PersonView, 
     WeponView,
     AmmoView,
-    ShootingView
+    ShootingView,
+
+    UserLoginView,
     )
 
 urlpatterns = [
@@ -11,4 +13,5 @@ urlpatterns = [
     path('wepons/', WeponView.as_view()),
     path('ammo/', AmmoView.as_view()),
     path('shooting/', ShootingView.as_view()),
+    path('login/', UserLoginView.as_view(), name='login'),
 ]
